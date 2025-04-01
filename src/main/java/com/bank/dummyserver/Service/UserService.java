@@ -2,76 +2,21 @@ package com.bank.dummyserver.Service;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import com.bank.dummyserver.dtos.UserSummaryDTO;
 import com.bank.dummyserver.dtos.UserVerificationDTO;
 import com.bank.dummyserver.model.User;
-import com.bank.dummyserver.repository.UserRepository;
 
-@Service
-public class UserService {
+public interface UserService {
+    public User getUserIfVerified(UserVerificationDTO dto);
 
-    @Autowired
-    private UserRepository userRepository;
+    public boolean verifyUser(UserVerificationDTO dto);
 
-    public UserService(UserRepository userRepository) {
-        this.userRepository = userRepository;
-    }
+    public List<UserSummaryDTO> getAllUserSummaries();
 
-    public User getUserIfVerified(UserVerificationDTO dto) {
-        Optional<User> user = userRepository
-                .findByFirstNameAndFamilyNameAndIdNumberAndCardNumberAndExpiryDateAndSecurityCode(
-                        dto.getFirstName(),
-                        dto.getFamilyName(),
-                        dto.getIdNumber(),
-                        dto.getCardNumber(),
-                        dto.getExpiryDate(),
-                        dto.getSecurityCode());
+    public boolean updateShayyikliAccountNumber(String cardNumber, Integer shayyikliAccountNumber);
 
-        return user.orElse(null);
-    }
+    public Optional<User> getUserByCardNumber(String cardNumber);
 
-    public boolean verifyUser(UserVerificationDTO dto) {
-        Optional<User> user = userRepository
-                .findByFirstNameAndFamilyNameAndIdNumberAndCardNumberAndExpiryDateAndSecurityCode(
-                        dto.getFirstName(),
-                        dto.getFamilyName(),
-                        dto.getIdNumber(),
-                        dto.getCardNumber(),
-                        dto.getExpiryDate(),
-                        dto.getSecurityCode());
-        return user.isPresent();
-    }
-
-    public List<UserSummaryDTO> getAllUserSummaries() {
-        return userRepository.findAll().stream()
-                .map(user -> new UserSummaryDTO(user.getIdNumber(), user.getFirstName(), user.getFamilyName(),
-                        user.getCardNumber()))
-                .collect(Collectors.toList());
-    }
-
-    public boolean updateShayyikliAccountNumber(String cardNumber, Integer shayyikliAccountNumber) {
-        Optional<User> userOptional = userRepository.findByCardNumber(cardNumber);
-
-        if (userOptional.isPresent()) {
-            User user = userOptional.get();
-            user.setShayyikliAccountNumber(shayyikliAccountNumber);
-            userRepository.save(user);
-            return true;
-        }
-        return false;
-    }
-
-    public Optional<User> getUserByCardNumber(String cardNumber) {
-        return userRepository.findByCardNumber(cardNumber);
-    }
-
-    public Optional<User> getUserByshayyikliAccountNumber(Integer shayyikliAccountNumber) {
-        return userRepository.findByshayyikliAccountNumber(shayyikliAccountNumber);
-    }
-    
+    public Optional<User> getUserByshayyikliAccountNumber(Integer shayyikliAccountNumber);
 }

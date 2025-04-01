@@ -46,7 +46,7 @@ public class UserController {
         }
     }
 
-    @GetMapping("/summary")
+    @GetMapping("/summaries")
     public List<UserSummaryDTO> getAllUserSummaries() {
         return userService.getAllUserSummaries();
     }
@@ -74,7 +74,7 @@ public class UserController {
         }
     }
 
-    @PostMapping("/Update_balance")
+    @PostMapping("/update_balance")
     public ResponseEntity<?> UpdateBalanceByshayyikliAccountNumber(@RequestParam Integer shayyikliAccountNumber,
             @RequestParam BigDecimal balance) {
         Optional<User> userOptional = userService.getUserByshayyikliAccountNumber(shayyikliAccountNumber);

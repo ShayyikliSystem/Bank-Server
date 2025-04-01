@@ -24,6 +24,7 @@ public class UserBalanceResponseDTO {
     public BigDecimal getBalance() {
         return balance;
     }
+
     public void setBalance(BigDecimal balance) {
         this.balance = balance;
     }
