@@ -1,4 +1,4 @@
-// to generate dummy users
+// //to generate dummy users
 // package com.bank.dummyserver;
 
 // import java.math.BigDecimal;
@@ -20,8 +20,8 @@
 // private UserRepository userRepository;
 
 // private final List<String> firstNames = List.of(
-// "Mohammed", "Ahmed", "Ali", "Youssef", "Ibrahim",
-// "Khaled", "Omar", "Sami", "Majed", "Noor"
+// "Mohammed", "Azhar", "Ali", "Nahla", "Ibrahim",
+// "Khaled", "Omar", "Sawsan", "Majed", "Amera"
 // );
 
 // private final List<String> familyNames = List.of(
@@ -57,8 +57,8 @@
 // securityCode, balance);
 
 // userRepository.save(user);
-// System.out.println("User " + firstName + " " + familyName + " created with
-// balance: " + balance);
+// // System.out.println("User " + firstName + " " + familyName + " created with
+// // balance: " + balance);
 // } else {
 // System.out.println("User with ID " + idNumber + " already exists.");
 // }
@@ -86,9 +86,9 @@
 // private String generateExpiryDate() {
 // Random random = new Random();
 // int month = random.nextInt(12) + 1; // Generates a random month between 1 and
-// 12
+// //12
 // int year = random.nextInt(6) + 25; // Generates a random year between 25
-// (2025) and 30 (2030)
+// //(2025) and 30 (2030)
 // return String.format("%02d/%02d", month, year);
 // }
 
