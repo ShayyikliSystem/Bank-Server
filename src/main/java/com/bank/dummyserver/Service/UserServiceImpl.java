@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.bank.dummyserver.dtos.UserSummaryDTO;
@@ -15,7 +14,6 @@ import com.bank.dummyserver.repository.UserRepository;
 @Service
 public class UserServiceImpl implements UserService {
 
-    @Autowired
     private UserRepository userRepository;
 
     public UserServiceImpl(UserRepository userRepository) {
