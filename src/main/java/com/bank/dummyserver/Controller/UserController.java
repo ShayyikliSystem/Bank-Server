@@ -29,8 +29,9 @@ public class UserController {
     @Autowired
     private UserRepository userRepository;
 
-    public UserController(UserService userService) {
+    public UserController(UserService userService, UserRepository userRepository) {
         this.userService = userService;
+        this.userRepository=userRepository;
     }
 
     @PostMapping("/verify")
