@@ -8,7 +8,6 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.Digits;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
@@ -54,7 +53,6 @@ public class User {
 
     @Column(precision = 10, scale = 2, nullable = false)
     @NotNull(message = "Balance is required")
-    @DecimalMin(value = "0.00", inclusive = true, message = "Balance must be a positive number")
     @Digits(integer = 8, fraction = 2, message = "Balance must have up to 8 digits and 2 decimal places")
     private BigDecimal balance;
 
