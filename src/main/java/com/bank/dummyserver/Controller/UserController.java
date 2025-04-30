@@ -63,13 +63,21 @@ public class UserController {
     }
 
     @GetMapping("/balance")
-    public ResponseEntity<?> getBalanceByCardNumber(@RequestParam String cardNumber) {
-        Optional<User> userOptional = userService.getUserByCardNumber(cardNumber);
+    public ResponseEntity<?> getBalanceByShayyikliAccountNumber(
+            @RequestParam Integer shayyikliAccountNumber) {
+
+        Optional<User> userOptional = userService.getUserByshayyikliAccountNumber(shayyikliAccountNumber);
+
         if (userOptional.isPresent()) {
-            User user = userOptional.get();
-            return ResponseEntity.ok(user.getBalance());
+            BigDecimal balance = userOptional.get().getBalance();
+            return ResponseEntity.ok(new UserBalanceResponseDTO(
+                    userOptional.get().getFirstName(),
+                    userOptional.get().getFamilyName(),
+                    balance));
         } else {
-            return ResponseEntity.status(404).body("User with card number " + cardNumber + " not found.");
+            return ResponseEntity.status(404)
+                    .body("User with Shayyikli account number "
+                            + shayyikliAccountNumber + " not found.");
         }
     }
 
